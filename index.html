@@ -117,10 +117,12 @@
 						</div>
 						<h6>Markup</h6>
 							<pre><code data-trim>
-<p>Controller Text: {{vm.text}}</p>
-<ul>
-	<li ng-repeat="int in vm.ints">{{int}}</li>
-</ul>		
+<div class="_angularOverview" ng-controller="naiveController as vm">
+	<p>Controller Text: {{vm.text}}</p>
+	<ul>
+		<li ng-repeat="int in vm.ints">{{int}}</li>
+	</ul>
+</div>		
 							</code></pre>
 							<h6>Javascript</h6>
 							<pre><code data-trim>
@@ -155,18 +157,20 @@ angular.module("angularOverview").controller('naiveController', function(){
 							</div>
 							<h6>Markup</h6>
 							<pre><code data-trim>
-<div>
-	<label for="twoWayText">Input text:</label>
-	<input type="text" id="twoWayText" ng-model="vm.text"/>
+<div class="_angularOverview" ng-controller="naiveController as vm">
+	<div>
+		<label for="twoWayText">Input text:</label>
+		<input type="text" id="twoWayText" ng-model="vm.text"/>
+	</div>
+	<div>
+		<label for="arrayBind">Array[2] Value:</label>
+		<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
+	</div>
+	<p>Controller Text: {{vm.text}}</p>
+	<ul>
+		<li ng-repeat="int in vm.ints">{{int}}</li>
+	</ul>
 </div>
-<div>
-	<label for="arrayBind">Array[2] Value:</label>
-	<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
-</div>
-<p>Controller Text: {{vm.text}}</p>
-<ul>
-	<li ng-repeat="int in vm.ints">{{int}}</li>
-</ul>	
 							</code></pre>
 					</section>
 					<section>
@@ -194,16 +198,18 @@ angular.module("angularOverview").controller('naiveController', function(){
 								<list-numbers numbers="vm.ints"></list-numbers>
 							</div>
 							<pre><code data-trim>
-<div>
-	<label for="twoWayText">Input text:</label>
-	<input type="text" id="twoWayText" ng-model="vm.text"/>
+<div class="_angularOverview" ng-controller="naiveController as vm">
+	<div>
+		<label for="twoWayText">Input text:</label>
+		<input type="text" id="twoWayText" ng-model="vm.text"/>
+	</div>
+	<div>
+		<label for="arrayBind">Array[2] Value:</label>
+		<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
+	</div>
+	<p>Controller Text: {{vm.text}}</p>
+	<list-numbers numbers="vm.ints"></list-numbers>
 </div>
-<div>
-	<label for="arrayBind">Array[2] Value:</label>
-	<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
-</div>
-<p>Controller Text: {{vm.text}}</p>
-<list-numbers data="vm.ints"></list-numbers>
 							</code></pre>
 							<pre><code data-trim>
 angular.module("angularOverview").directive('listNumbers', function () {
@@ -297,9 +303,12 @@ angular.module("angularOverview").factory('IntegralService', function () {
 					</section>
 				</section>
 				<section>
+					<h1>Some Code!</h1>
+				</section>
+				<section>
 					<h1>Some easy pitfalls</h1>
 					<ul>
-						<li class="fragment">Relying only on scope/not using controller as</li>
+						<li class="fragment">Relying only on scope/not using 'controller as'</li>
 						<li class="fragment">It's not a silver bullet</li>
 						<li class="fragment">Angular 2 is on the horizon</li>
 					</ul>
@@ -309,7 +318,8 @@ angular.module("angularOverview").factory('IntegralService', function () {
 					<h2>Resources</h2>
 					<ul>
 						<li>Slides: <a href="http://owencraig.com/ng_overview/">http://ng-overview.owencraig.com/ng_overview</a></li>
-						<li>Source: <a href="http://github.com/goody/ng_overview">http://github.com/goody/ng_overview</a></li>
+						<li>Slides Source: <a href="https://github.com/owencraig/ng-overview-slides">https://github.com/owencraig/ng-overview-slides</a></li>
+						<li>Source: <a href="http://jsfiddle.net/goody/omfduLc2/">http://jsfiddle.net/goody/omfduLc2/</a></li>
 					</ul>
 					<h2>Us</h2>
 					<ul>
