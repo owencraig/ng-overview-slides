@@ -20,6 +20,7 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<link rel="stylesheet" href="style.css" />
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -34,6 +35,7 @@
 				<section>
 					<h1>AngularJs overview</h1>
 					<h6>(cool people would call it an ng Overview)</h6>
+					<img src="img/AngularJS-Shield-large.png"/>
 					<aside class="notes">
 						<ul>
 							<li>Remember to tell people to ask questions at any time</li>
@@ -44,7 +46,8 @@
 				<section>
 					<h2>Luckily, we're not cool people</h2>
 					<h5>Scot Goodhart and Owen Craig</h5>
-					<p>Lifelong nerds, we both work as consultants for Rightpoint Consulting with almost 15 years combined experience in server side .Net and a more recent deep dive into client side development specialising in AngularJs</p>
+					<p>Lifelong nerds, we both work as consultants for Rightpoint Consulting with almost 20 years combined experience in server side .Net and a more recent deep dive into client side development specialising in AngularJs</p>
+
 					<aside class="notes">
 						<ul>
 							<li>A bit of a chat about rightpoint and that we're hiring?</li>
@@ -106,25 +109,25 @@
 						</ul>
 					</section>
 					<section>
-						<div class="twoWayDataBinding" ng-controller="homeCtrl as vm">
+						<div class="angularOverview" ng-controller="naiveController as vm">
 							<p>Controller Text: {{vm.text}}</p>
 							<ul>
 								<li ng-repeat="int in vm.ints">{{int}}</li>
 							</ul>
 						</div>
 						<h6>Markup</h6>
-							<pre><code>
+							<pre><code data-trim>
 <p>Controller Text: {{vm.text}}</p>
 <ul>
 	<li ng-repeat="int in vm.ints">{{int}}</li>
 </ul>		
 							</code></pre>
 							<h6>Javascript</h6>
-							<pre><code>
-angular.module("twoWayDataBinding").controller('homeCtrl', function(){
+							<pre><code data-trim>
+angular.module("angularOverview").controller('naiveController', function(){
 	var vm = this;
 	vm.text = 'Hello, World';
-	vm.ints = [42,28,15,9,99];
+	vm.ints = [42,28,15,9,180,99];
 });
 							</code></pre>
 					</section>
@@ -136,7 +139,7 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 						</ul>
 					</section>
 					<section>
-							<div class="twoWayDataBinding" ng-controller="homeCtrl as vm">
+							<div class="angularOverview" ng-controller="naiveController as vm">
 								<div>
 									<label for="twoWayText">Input text:</label>
 									<input type="text" id="twoWayText" ng-model="vm.text"/>
@@ -151,7 +154,7 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 								</ul>
 							</div>
 							<h6>Markup</h6>
-							<pre><code>
+							<pre><code data-trim>
 <div>
 	<label for="twoWayText">Input text:</label>
 	<input type="text" id="twoWayText" ng-model="vm.text"/>
@@ -178,6 +181,43 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 						</aside>
 					</section>
 					<section>
+							<div class="angularOverview" ng-controller="naiveController as vm">
+								<div>
+									<label for="twoWayText">Input text:</label>
+									<input type="text" id="twoWayText" ng-model="vm.text"/>
+								</div>
+								<div>
+									<label for="arrayBind">Array[2] Value:</label>
+									<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
+								</div>
+								<p>Controller Text: {{vm.text}}</p>
+								<list-numbers numbers="vm.ints"></list-numbers>
+							</div>
+							<pre><code data-trim>
+<div>
+	<label for="twoWayText">Input text:</label>
+	<input type="text" id="twoWayText" ng-model="vm.text"/>
+</div>
+<div>
+	<label for="arrayBind">Array[2] Value:</label>
+	<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
+</div>
+<p>Controller Text: {{vm.text}}</p>
+<list-numbers data="vm.ints"></list-numbers>
+							</code></pre>
+							<pre><code data-trim>
+angular.module("angularOverview").directive('listNumbers', function () {
+	return {
+		restrict: 'E',
+		scope: {
+			numbers: '='
+		},
+		template:'<ul><li ng-repeat="int in numbers">{{int}}</li></ul>'
+	};
+});								
+							</code></pre>
+					</section>
+					<section>
 						<h2>Services/Factories</h2>
 						<ul>
 							<li>Increases encapsulation</li>
@@ -199,12 +239,51 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 						</aside>
 					</section>
 					<section>
+							<div class="angularOverview" ng-controller="diController as vm">
+								<div>
+									<label for="twoWayText">Input text:</label>
+									<input type="text" id="twoWayText" ng-model="vm.text"/>
+								</div>
+								<div>
+									<label for="arrayBind">Array[2] Value:</label>
+									<input type="number" id="arrayBind" ng-model="vm.ints[2]"/>
+								</div>
+								<p>Controller Text: {{vm.text}}</p>
+								<list-numbers numbers="vm.ints"></list-numbers>
+							</div>
+							<pre><code data-trim>
+angular.module("angularOverview").controller('diController', function(IntegralService){
+	var vm = this;
+	vm.text = 'Hello, World';
+	vm.ints = IntegralService.getSomeInts();
+});
+
+angular.module("angularOverview").factory('IntegralService', function () {
+	return {
+		getSomeInts: getSomeInts
+	};
+
+	function getSomeInts(){
+		return [42,28,15,9,180,99];
+	}
+});							
+							</code></pre>
+					</section>
+					<section>
 						<h2>Modules</h2>
 						<ul>
 							<li>Every app in angular is a module</li>
 							<li>Modules can be injected into each other</li>
 							<li>Allows for common libraries to be built and passed around</li>
 							<li>Combined with a model oriented architecture, allows switching on and off of application functionality</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Promises</h2>
+						<ul>
+							<li>Helps avoid the pyramid of doom</li>
+							<li>Makes async code a little nicer</li>
+							<li>Gives explicit error handling for callbacks</li>
 						</ul>
 					</section>
 					<section>
@@ -220,21 +299,21 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 				<section>
 					<h1>Some easy pitfalls</h1>
 					<ul>
-						<li>Relying solely on scope</li>
-						<li>It's not a silver bullet</li>
-						<li>Angular 2 is on the horizon</li>
+						<li class="fragment">Relying only on scope/not using controller as</li>
+						<li class="fragment">It's not a silver bullet</li>
+						<li class="fragment">Angular 2 is on the horizon</li>
 					</ul>
 				</section>
 				<section>
 					<h1>Thank you</h1>
 					<h2>Resources</h2>
 					<ul>
-						<li>Slides: <a href="http://owencraig.com/ng_overview/">http://owencraig.com/ng_overview</a></li>
+						<li>Slides: <a href="http://owencraig.com/ng_overview/">http://ng-overview.owencraig.com/ng_overview</a></li>
 						<li>Source: <a href="http://github.com/goody/ng_overview">http://github.com/goody/ng_overview</a></li>
 					</ul>
 					<h2>Us</h2>
 					<ul>
-						<li>Scot Goodhart: <a href="http://twitter.com/goody71">@goody71</a>  &mdash; <a href="http://g00dy.com">g00dy.com</a></li>
+						<li>Scot Goodhart: <a href="http://twitter.com/goody71">@goody71</a></li>
 						<li>Owen Craig: <a href="http://twitter.com/owencraig">@owencraig</a> &mdash; <a href="http://owencraig.com">owencraig.com</a></li>
 					</ul>
 					<h2>Rightpoint</h2>
@@ -254,7 +333,7 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
+				center: false,
 
 				width: 1920,
 				height: 1080,
@@ -278,15 +357,41 @@ angular.module("twoWayDataBinding").controller('homeCtrl', function(){
 			angular.module("viewModel",[]).run();
 		</script>-->
 		<script type="text/javascript">
-			angular.module("twoWayDataBinding",[]);
+			angular.module("angularOverview",[]);
 
-			angular.module("twoWayDataBinding").controller('homeCtrl', function(){
+			angular.module("angularOverview").controller('naiveController', function(){
 				var vm = this;
 				vm.text = 'Hello, World';
-				vm.ints = [42,28,15,9,99];
+				vm.ints = [42,28,15,9,180,99];
 			});
 
-			angular.bootstrap(document.getElementsByClassName('twoWayDataBinding'),['twoWayDataBinding']);
+			angular.module("angularOverview").controller('diController', function(IntegralService){
+				var vm = this;
+				vm.text = 'Hello, World';
+				vm.ints = IntegralService.getSomeInts();
+			});
+
+			angular.module("angularOverview").factory('IntegralService', function () {
+				return {
+					getSomeInts: getSomeInts
+				};
+
+				function getSomeInts(){
+					return [42,28,15,9,180,99];
+				}
+			});
+
+			angular.module("angularOverview").directive('listNumbers', function () {
+				return {
+					restrict: 'E',
+					scope: {
+						numbers: '='
+					},
+					template:'<ul><li ng-repeat="int in numbers">{{int}}</li></ul>'
+				};
+			});
+
+			angular.bootstrap(document.getElementsByClassName('angularOverview'),['angularOverview']);
 		</script>
 
 	</body>

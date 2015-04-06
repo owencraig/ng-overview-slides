@@ -1,0 +1,10 @@
+.twoWayDataBinding li{
+	width: 50%;
+	float: left;
+}
+
+input[type="text"], input[type="number"] {
+  height: 1.5em;
+  font-size: 1.0em;
+  margin-top: 0.3em;
+}
