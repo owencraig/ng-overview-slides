@@ -1,7 +1,18 @@
-.twoWayDataBinding li{
+.angularOverview  li{
 	width: 50%;
 	float: left;
 }
+
+label, .label{
+	width: 20%;
+	display: inline-block;
+	text-align: left;
+}
+
+label + *, .label + * {
+	width: 50%;
+}
+
 
 input[type="text"], input[type="number"] {
   height: 1.5em;
