@@ -120,7 +120,7 @@
 <div class="_angularOverview" ng-controller="naiveController as vm">
 	<p><span class="label">Controller Text:</span> {{vm.text}}</p>
 	<ul>
-		<li ng-repeat="int in vm.ints">{{int}}</li>
+		<li ng-repeat="int in vm.ints track by $index">{{int}}</li>
 	</ul>
 </div>		
 							</code></pre>
@@ -152,7 +152,7 @@ angular.module("angularOverview").controller('naiveController', function(){
 								</div>
 								<p><span class="label">Controller Text:</span> {{vm.text}}</p>
 								<ul>
-									<li ng-repeat="int in vm.ints">{{int}}</li>
+									<li ng-repeat="int in vm.ints track by $index">{{int}}</li>
 								</ul>
 							</div>
 							<h6>Markup</h6>
@@ -168,7 +168,7 @@ angular.module("angularOverview").controller('naiveController', function(){
 	</div>
 	<p><span class="label">Controller Text:</span> {{vm.text}}</p>
 	<ul>
-		<li ng-repeat="int in vm.ints">{{int}}</li>
+		<li ng-repeat="int in vm.ints track by $index">{{int}}</li>
 	</ul>
 </div>
 							</code></pre>
